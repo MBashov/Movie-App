@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
 import './css/App.css'
 
-import { MovieProvider } from './context/MovieContext'
 import NavBar from './components/NavBar'
 import Home from './pages/home'
 import Favorites from './pages/Favorites'
+import { MovieProvider } from './providers/MovieProvider'
 
 
 function App() {
