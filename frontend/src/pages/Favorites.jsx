@@ -7,7 +7,7 @@ export default function Favorites() {
 
     return (
         <div className='favorites-page'>
-            <p>Start adding movies to your favorites and they will appear hear!</p>
+            <p>Start adding movies to your favorites and they will appear here!</p>
             {favorites.length > 0 ? (
                 <div className="favorites">
                     <h2>Your Favorites</h2>

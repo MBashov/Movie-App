@@ -2,9 +2,9 @@ import { Routes, Route } from 'react-router-dom'
 import './css/App.css'
 
 import NavBar from './components/NavBar'
-import Home from './pages/home'
 import Favorites from './pages/Favorites'
 import { MovieProvider } from './providers/MovieProvider'
+import Home from './pages/Home'
 
 
 function App() {

@@ -60,17 +60,17 @@ export default function Home() {
                 <button type="submit" className="search-btn">Search</button>
             </form>
 
-            {error && <div className='error-message'>{error}</div>}
+            {error && <div className="error-message">{error}</div>}
 
             {loading ? (
-                <div className='loading'>Loading...</div>
-            ) : (
+                <div className="loading">Loading...</div>
+            ) : movies.length ? (
                 <div className="movies-grid">
                     {movies.map((movie) => (
                         <MovieCard movie={movie} key={movie.id} />
                     ))}
                 </div>
-            )}
+            ) : (<p className="not-found">No Movies Found</p>)}
         </div>
     );
 }
