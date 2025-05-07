@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieDetails, getMovieTrailer } from "../services/api";
+import '../css/movieDetails.css'
 
 export default function MovieDetails() {
     const [movie, setMovie] = useState(null);
