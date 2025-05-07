@@ -8,6 +8,20 @@ export const getPopularMovies = async () => {
     return data.results;
 };
 
+export const getMovieDetails = async (id) => {
+    const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=en-US`);
+    const data = await response.json();
+
+    return data;
+};
+
+export const getMovieTrailer = async (id) => {
+    const response = await fetch(`${BASE_URL}/movie/${id}/videos?api_key=${API_KEY}&language=en-US`);
+    const data = await response.json();
+
+    return data;
+}
+
 export const searchMovies = async (query) => {
     const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}`);
   
