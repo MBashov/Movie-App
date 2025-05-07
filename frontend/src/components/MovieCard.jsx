@@ -1,13 +1,15 @@
+import { Link } from 'react-router-dom'
+
 import { useMovieContext } from '../context/MovieContext';
 import '../css/MovieCard.css'
 
 export default function MovieCard({ movie }) {
     const { isFavorite, addToFavorites, removeFromFavorites } = useMovieContext();
     const favorite = isFavorite(movie.id);
-    
+
     function onFavoriteClick(e) {
         e.preventDefault();
-        
+
         if (favorite) {
             removeFromFavorites(movie.id);
         } else {
@@ -26,7 +28,7 @@ export default function MovieCard({ movie }) {
                 </div>
             </div>
             <div className="movie-info">
-                <h3>{movie.title}</h3>
+                <Link to={`/movie/${movie.id}`}>{movie.title}</Link>
                 <p>{movie.release_date?.split('-')[0]}</p>
             </div>
         </div>
