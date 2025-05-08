@@ -49,7 +49,8 @@ Create a `.env` file in the `frontend/` folder and add:
 ```ini
 VITE_TMDB_API_KEY=your_tmdb_api_key
 ```   
-You can get your API key from TMDB
+You can get your API key from [TMDB](https://www.themoviedb.org/)
+
 
 ### 4. Start the development server
 ```bash
@@ -60,6 +61,7 @@ Visit http://localhost:5173 in your browser.
 ---
 ## 📁 Folder Structure
 
+```bash
 frontend/   
 ├── components/        # Reusable UI components (NavBar, MovieCard, etc.)   
 ├── context/           # Movie context and custom hook   
@@ -68,7 +70,7 @@ frontend/
 ├── services/          # API service for TMDB   
 ├── css/               # Component-specific CSS files   
 └── App.jsx            # Main app layout and routes   
-
+```
 ---
 
 ## 🖼️ Screenshots
