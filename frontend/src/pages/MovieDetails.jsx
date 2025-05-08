@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getMovieDetails, getMovieTrailer } from "../services/api";
+import { getMovieDetails, getMovieRating, getMovieTrailer } from "../services/api";
 import '../css/movieDetails.css'
 
 export default function MovieDetails() {
     const [movie, setMovie] = useState(null);
     const [trailer, setTrailer] = useState(null);
+    const [imdbRating, setImdbRating] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const { id } = useParams();
-    console.log(movie);
-    console.log(trailer);
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -21,10 +20,9 @@ export default function MovieDetails() {
                 setMovie(movieData);
 
                 const videos = await getMovieTrailer(id);
-                console.log(videos);
-
                 const trailerVideo = videos?.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
                 setTrailer(trailerVideo);
+
             } catch (err) {
                 setError('Movie Not Found');
                 console.log(err);
@@ -35,6 +33,22 @@ export default function MovieDetails() {
 
         fetchMovie()
     }, [id]);
+
+    useEffect(() => {
+        if (!movie?.imdb_id) return;
+
+        const fetchMovieRating = async () => {
+            try {
+                const rating = await getMovieRating(movie.imdb_id);
+                setImdbRating(rating);
+            } catch (err) {
+                console.error('Failed to fetch IMDb rating', err);
+            }
+        }
+
+        fetchMovieRating();
+
+    }, [movie?.imdb_id]);
 
     if (loading) {
         return <div>Loading...</div>
@@ -50,8 +64,9 @@ export default function MovieDetails() {
             <img src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`} alt={movie?.title} />
             <p>{movie?.overview}</p>
             <p>Release Date: {movie?.release_date}</p>
-            <p>Genres: {movie?.genres?.map(g => ([g.name, ' ']))}</p>
-            <p>Counry: {movie?.origin_country?.join(', ')}</p>
+            <p>Genres: {movie?.genres?.map(g => g.name).join(', ')}</p>
+            <p>Counry: {movie?.production_countries?.map(c => c.name).join(', ')}</p>
+            <p>IMDB Rating: {imdbRating?.imdbRating}</p>
 
             {trailer && (
                 <div className="trailer">
