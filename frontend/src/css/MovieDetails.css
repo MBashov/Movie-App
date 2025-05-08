@@ -1,3 +1,18 @@
+.back-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #4A90E2; /* Match your main button color */
+    color: white;
+    border-radius: 4px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.back-button:hover {
+    background-color: #357ABD;
+}
+
 .movie-detail {
     max-width: 900px;
     margin: 2rem auto;
