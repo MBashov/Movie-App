@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getMovieDetails, getMovieRating, getMovieTrailer } from "../services/api";
+import { useNavigate, useParams } from "react-router-dom";
 import '../css/movieDetails.css'
+
+import { getMovieDetails, getMovieRating, getMovieTrailer } from "../services/api";
 
 export default function MovieDetails() {
     const [movie, setMovie] = useState(null);
@@ -11,6 +12,7 @@ export default function MovieDetails() {
     const [loading, setLoading] = useState(true);
 
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchMovie = async () => {
@@ -59,29 +61,32 @@ export default function MovieDetails() {
     }
 
     return (
-        <div className="movie-detail">
-            <h1>{movie?.title}</h1>
-            <img src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`} alt={movie?.title} />
-            <p>{movie?.overview}</p>
-            <p>Release Date: {movie?.release_date}</p>
-            <p>Genres: {movie?.genres?.map(g => g.name).join(', ')}</p>
-            <p>Counry: {movie?.production_countries?.map(c => c.name).join(', ')}</p>
-            <p>IMDB Rating: {imdbRating?.imdbRating}</p>
+        <div>
+            <button onClick={() => navigate('/')}>Back</button>
+            <div className="movie-detail">
+                <h1>{movie?.title}</h1>
+                <img src={`https://image.tmdb.org/t/p/w500${movie?.poster_path}`} alt={movie?.title} />
+                <p>{movie?.overview}</p>
+                <p>Release Date: {movie?.release_date}</p>
+                <p>Genres: {movie?.genres?.map(g => g.name).join(', ')}</p>
+                <p>Counry: {movie?.production_countries?.map(c => c.name).join(', ')}</p>
+                <p>IMDB Rating: {imdbRating?.imdbRating}</p>
 
-            {trailer && (
-                <div className="trailer">
-                    <h2>{movie?.title}</h2>
-                    <iframe
-                        width="560"
-                        height="315"
-                        src={`https://www.youtube.com/embed/${trailer.key}`}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                    ></iframe>
-                </div>
-            )}
+                {trailer && (
+                    <div className="trailer">
+                        <h2>{movie?.title}</h2>
+                        <iframe
+                            width="560"
+                            height="315"
+                            src={`https://www.youtube.com/embed/${trailer.key}`}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        ></iframe>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
