@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import '../css/movieDetails.css'
 
 import { getMovieDetails, getMovieRating, getMovieTrailer } from "../services/api";
+import Spinner from "../components/Spinner";
 
 export default function MovieDetails() {
     const [movie, setMovie] = useState(null);
@@ -53,7 +54,7 @@ export default function MovieDetails() {
     }, [movie?.imdb_id]);
 
     if (loading) {
-        return <div>Loading...</div>
+        return <Spinner />
     }
 
     if (error || !movie) {

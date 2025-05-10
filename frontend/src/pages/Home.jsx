@@ -3,6 +3,7 @@ import '../css/Home.css'
 
 import MovieCard from "../components/MovieCard";
 import { getPopularMovies, searchMovies } from '../services/api';
+import Spinner from '../components/Spinner';
 
 export default function Home() {
 
@@ -63,7 +64,7 @@ export default function Home() {
             {error && <div className="error-message">{error}</div>}
 
             {loading ? (
-                <div className="loading">Loading...</div>
+                <Spinner />
             ) : movies.length ? (
                 <div className="movies-grid">
                     {movies.map((movie) => (
