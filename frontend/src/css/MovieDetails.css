@@ -49,10 +49,15 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-};
+}
 
 .trailer {
     margin-top: 3rem;
+}
+
+.no-trailer {
+    color: red;
+    font-size: 24px;
 }
 
 .trailer h2 {

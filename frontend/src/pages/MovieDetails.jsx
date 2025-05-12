@@ -11,7 +11,7 @@ export default function MovieDetails() {
     const [imdbRating, setImdbRating] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -25,7 +25,6 @@ export default function MovieDetails() {
                 const videos = await getMovieTrailer(id);
                 const trailerVideo = videos?.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
                 setTrailer(trailerVideo);
-
             } catch (err) {
                 setError('Movie Not Found');
                 console.log(err);
@@ -73,7 +72,7 @@ export default function MovieDetails() {
                 <p>Counry: {movie?.production_countries?.map(c => c.name).join(', ')}</p>
                 <p>IMDB Rating: {imdbRating?.imdbRating}</p>
 
-                {trailer && (
+                {trailer ? (
                     <div className="trailer">
                         <h2>{movie?.title}</h2>
                         <iframe
@@ -86,6 +85,8 @@ export default function MovieDetails() {
                             allowFullScreen
                         ></iframe>
                     </div>
+                ) : (
+                    <div className="no-trailer">No trailer available yet</div>
                 )}
             </div>
         </div>
